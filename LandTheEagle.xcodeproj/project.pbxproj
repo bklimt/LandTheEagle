@@ -52,7 +52,7 @@
 		7C1AB2E918AE170700789D0F /* flame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame.png; sourceTree = "<group>"; };
 		7C1AB2EB18AE179100789D0F /* BKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKShip.h; sourceTree = "<group>"; };
 		7C1AB2EC18AE179100789D0F /* BKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKShip.m; sourceTree = "<group>"; };
-		7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LandTheEagle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = LandTheEagle.app; path = "Land the Eagle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C4697FF18A9CF0B003E87DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C46980118A9CF0B003E87DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7C46980318A9CF0B003E87DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -212,9 +212,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7C4697FB18A9CF0B003E87DE /* LandTheEagle */ = {
+		7C4697FB18A9CF0B003E87DE /* Land Eagle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C46983518A9CF0B003E87DE /* Build configuration list for PBXNativeTarget "LandTheEagle" */;
+			buildConfigurationList = 7C46983518A9CF0B003E87DE /* Build configuration list for PBXNativeTarget "Land Eagle" */;
 			buildPhases = (
 				7C4697F818A9CF0B003E87DE /* Sources */,
 				7C4697F918A9CF0B003E87DE /* Frameworks */,
@@ -224,7 +224,7 @@
 			);
 			dependencies = (
 			);
-			name = LandTheEagle;
+			name = "Land Eagle";
 			productName = LandTheEagle;
 			productReference = 7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */;
 			productType = "com.apple.product-type.application";
@@ -275,7 +275,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7C4697FB18A9CF0B003E87DE /* LandTheEagle */,
+				7C4697FB18A9CF0B003E87DE /* Land Eagle */,
 				7C46982318A9CF0B003E87DE /* LandTheEagleTests */,
 			);
 		};
@@ -339,7 +339,7 @@
 /* Begin PBXTargetDependency section */
 		7C46982A18A9CF0B003E87DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7C4697FB18A9CF0B003E87DE /* LandTheEagle */;
+			target = 7C4697FB18A9CF0B003E87DE /* Land Eagle */;
 			targetProxy = 7C46982918A9CF0B003E87DE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -526,7 +526,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C46983518A9CF0B003E87DE /* Build configuration list for PBXNativeTarget "LandTheEagle" */ = {
+		7C46983518A9CF0B003E87DE /* Build configuration list for PBXNativeTarget "Land Eagle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7C46983618A9CF0B003E87DE /* Debug */,

@@ -250,6 +250,10 @@ static const int kStateLost = 3;
     float dy = sum / kSampleCount;
     self.tooFast = (dy >= 3);
 
+    if (self.tooFast) {
+        // self.filter = [CIFilter filterWithName:@"CIZoomBlur"];
+    }
+
     self.speedLabel.text = [NSString stringWithFormat:@"Speed: %d", (int32_t)dy];
     self.speedLabel.fontColor = (self.tooFast ? [UIColor redColor] : [UIColor whiteColor]);
 }

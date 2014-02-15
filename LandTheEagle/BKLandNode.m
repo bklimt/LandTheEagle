@@ -49,7 +49,7 @@
     moving = YES;
 
     float speed = 0.3 + ((1.0 - (self.level / (float)kLevels)) * 0.4);
-    NSLog(@"Ground is moving at %f Hz.", speed);
+    NSLog(@"Ground is moving at %f seconds.", speed);
 
     SKAction *moveLeft = [SKAction moveToX:(-kLandTileWidth) duration:speed];
     SKAction *addTile = [SKAction runBlock:^{
