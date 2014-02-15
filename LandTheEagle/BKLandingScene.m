@@ -250,9 +250,24 @@ static const int kStateLost = 3;
     float dy = sum / kSampleCount;
     self.tooFast = (dy >= 3);
 
-    if (self.tooFast) {
-        // self.filter = [CIFilter filterWithName:@"CIZoomBlur"];
+    if (dy > 2.5) {
+        double radius = ((dy - 2.5) * 2.0);
+        if (radius > 3.0) {
+            radius = 3.0;
+        }
+
+        if (!self.filter) {
+            CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+            [filter setDefaults];
+            self.filter = filter;
+        }
+        [self.filter setValue:@(radius) forKey:@"inputRadius"];
+
+        self.shouldEnableEffects = YES;
+    } else {
+        self.shouldEnableEffects = NO;
     }
+
 
     self.speedLabel.text = [NSString stringWithFormat:@"Speed: %d", (int32_t)dy];
     self.speedLabel.fontColor = (self.tooFast ? [UIColor redColor] : [UIColor whiteColor]);
