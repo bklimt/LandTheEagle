@@ -13,6 +13,7 @@
 
 @interface BKLandNode ()
 @property (nonatomic) int level;
+@property (nonatomic) float flatProbability;
 @end
 
 @implementation BKLandNode
@@ -24,6 +25,12 @@
 - (instancetype)initWithLevel:(int)level {
     if (self = [super init]) {
         self.level = level;
+
+        self.flatProbability = 1.0 - (self.level / (float)kLevels);
+        if (self.flatProbability > 0.9) {
+            self.flatProbability = 0.9;
+        }
+        NSLog(@"Probability of flat ground is %f.", self.flatProbability);
 
         currentRow = kLandMaxHeight / 2;
         for (int i = 0; i < kLandTotalTiles; ++i) {
@@ -41,7 +48,8 @@
     }
     moving = YES;
 
-    float speed = 0.3 + ((self.level / (float)kLevels) * 0.4);
+    float speed = 0.3 + ((1.0 - (self.level / (float)kLevels)) * 0.4);
+    NSLog(@"Ground is moving at %f Hz.", speed);
 
     SKAction *moveLeft = [SKAction moveToX:(-kLandTileWidth) duration:speed];
     SKAction *addTile = [SKAction runBlock:^{
@@ -73,10 +81,8 @@
 }
 
 - (void)appendTile:(int)position {
-    float flatProbability = 1.0 - (self.level / (float)kLevels);
-
     int delta;
-    if ((rand() % 100) < (int)(flatProbability * 100)) {
+    if ((rand() % 100) < (int)(self.flatProbability * 100)) {
         delta = 0;
     } else {
         if (rand() % 2) {

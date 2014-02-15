@@ -21,8 +21,8 @@
 
     SKLabelNode *labelNode = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
     labelNode.text = text;
-    labelNode.fontSize = 18;
-    labelNode.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect) + 10);
+    labelNode.fontSize = 24;
+    labelNode.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect) + 15);
     labelNode.fontColor = [UIColor blueColor];
 
     BKButton *node = [BKButton node];
@@ -35,6 +35,10 @@
 }
 
 - (BOOL)isTouchedInScene:(SKScene *)scene withTouches:(NSSet *)touches {
+    if (self.isHidden) {
+        return NO;
+    }
+
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:scene];
         for (SKNode *node in [scene nodesAtPoint:location]) {

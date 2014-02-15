@@ -36,10 +36,10 @@
         myLabel.position = center;
         [self addChild:myLabel];
 
-        BKLandNode *land = [BKLandNode landNodeWithLevel:10];
+        BKLandNode *land = [BKLandNode landNodeWithLevel:(kLevels / 2)];
         [self addChild:land];
 
-        CGRect buttonRect = CGRectMake(40, 150, self.frame.size.width - 80, 32);
+        CGRect buttonRect = CGRectMake(40, 150, self.frame.size.width - 80, 48);
         self.startButton = [BKButton buttonWithText:@"Start" inRect:buttonRect];
         [self addChild:self.startButton];
     }

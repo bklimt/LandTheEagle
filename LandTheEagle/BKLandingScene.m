@@ -30,7 +30,8 @@ static const int kStateLost = 3;
 @property (nonatomic, retain) SKLabelNode *youLostLabel;
 
 @property (nonatomic, retain) BKButton *youWonButton;
-@property (nonatomic, retain) BKButton *youLostButton;
+@property (nonatomic, retain) BKButton *retryButton;
+@property (nonatomic, retain) BKButton *giveUpButton;
 
 @property (nonatomic) int level;
 @property (nonatomic) BOOL tooFast;
@@ -59,7 +60,7 @@ static const int kStateLost = 3;
         self.physicsWorld.gravity = CGVectorMake(0, -0.7);
         self.physicsWorld.contactDelegate = self;
 
-        self.fuel = 100 - 70 * (self.level / (int)kLevels);
+        self.fuel = 100 - 70 * (self.level / (float)kLevels);
 
         CGPoint center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         SKNode *space = [SKSpriteNode spriteNodeWithImageNamed:@"background.png"];
@@ -71,8 +72,8 @@ static const int kStateLost = 3;
         [self addChild:self.land];
 
         self.levelLabel = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
-        self.levelLabel.text = [NSString stringWithFormat:@"Level: %d", self.level];
-        self.levelLabel.fontSize = 20;
+        self.levelLabel.text = [NSString stringWithFormat:@"Level: %d", (self.level + 1)];
+        self.levelLabel.fontSize = 25;
         self.levelLabel.fontColor = [UIColor whiteColor];
         self.levelLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                                CGRectGetMaxY(self.frame) - 50);
@@ -80,7 +81,7 @@ static const int kStateLost = 3;
 
         self.speedLabel = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
         self.speedLabel.text = @"Speed: 0";
-        self.speedLabel.fontSize = 20;
+        self.speedLabel.fontSize = 25;
         self.speedLabel.fontColor = [UIColor whiteColor];
         self.speedLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                                CGRectGetMaxY(self.frame) - 80);
@@ -88,7 +89,7 @@ static const int kStateLost = 3;
 
         self.fuelLabel = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
         self.fuelLabel.text = [NSString stringWithFormat:@"Fuel: %d", self.fuel];
-        self.fuelLabel.fontSize = 20;
+        self.fuelLabel.fontSize = 25;
         self.fuelLabel.fontColor = [UIColor whiteColor];
         self.fuelLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                               CGRectGetMaxY(self.frame) - 110);
@@ -101,7 +102,7 @@ static const int kStateLost = 3;
         [self addChild:self.ship];
         
         self.youWonLabel = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
-        self.youWonLabel.text = @"You win!";
+        self.youWonLabel.text = @"You landed!";
         self.youWonLabel.fontSize = 40;
         self.youWonLabel.fontColor = [UIColor whiteColor];
         self.youWonLabel.position = CGPointMake(CGRectGetMidX(self.frame),
@@ -118,13 +119,18 @@ static const int kStateLost = 3;
         self.youLostLabel.hidden = YES;
         [self addChild:self.youLostLabel];
 
-        CGRect buttonRect = CGRectMake(40, 200, self.frame.size.width - 80, 32);
+        CGRect button1Rect = CGRectMake(40, 200, self.frame.size.width - 80, 48);
+        CGRect button2Rect = CGRectMake(40, 120, self.frame.size.width - 80, 48);
 
-        self.youLostButton = [BKButton buttonWithText:@"Okay" inRect:buttonRect];
-        self.youLostButton.hidden = YES;
-        [self addChild:self.youLostButton];
+        self.retryButton = [BKButton buttonWithText:@"Retry" inRect:button1Rect];
+        self.retryButton.hidden = YES;
+        [self addChild:self.retryButton];
 
-        self.youWonButton = [BKButton buttonWithText:@"Next Level" inRect:buttonRect];
+        self.giveUpButton = [BKButton buttonWithText:@"Give Up" inRect:button2Rect];
+        self.giveUpButton.hidden = YES;
+        [self addChild:self.giveUpButton];
+
+        self.youWonButton = [BKButton buttonWithText:@"Next Level" inRect:button1Rect];
         self.youWonButton.hidden = YES;
         [self addChild:self.youWonButton];
     }
@@ -147,10 +153,15 @@ static const int kStateLost = 3;
 
         SKAction *wait = [SKAction waitForDuration:1.0];
         [self runAction:wait completion:^{
-            self.youLostButton.hidden = NO;
-            self.youLostButton.alpha = 0.0;
+            self.retryButton.hidden = NO;
+            self.retryButton.alpha = 0.0;
+
+            self.giveUpButton.hidden = NO;
+            self.giveUpButton.alpha = 0.0;
+
             SKAction *fadeIn = [SKAction fadeInWithDuration:0.5];
-            [self.youLostButton runAction:fadeIn];
+            [self.retryButton runAction:fadeIn];
+            [self.giveUpButton runAction:fadeIn];
         }];
 
     } else {
@@ -158,7 +169,12 @@ static const int kStateLost = 3;
         [self.land stopMoving];
         [self.ship turnOff];
 
+        int nextLevel = self.level + 1;
         self.youWonLabel.hidden = NO;
+        if (nextLevel >= kLevels) {
+            self.youWonLabel.text = @"You win!";
+            return;
+        }
 
         SKAction *wait = [SKAction waitForDuration:1.0];
         [self runAction:wait completion:^{
@@ -182,18 +198,30 @@ static const int kStateLost = 3;
         }
         case kStateWon: {
             if ([self.youWonButton isTouchedInScene:self withTouches:touches]) {
-                SKView *view = self.view;
-                BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
-                                                                       level:(self.level + 1)];
-                SKTransition *transition = [SKTransition fadeWithDuration:0.1];
-                [view presentScene:scene transition:transition];
+                int nextLevel = self.level + 1;
+                if (nextLevel >= kLevels) {
+                    // You've beaten the game!
+                } else {
+                    SKView *view = self.view;
+                    BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
+                                                                           level:nextLevel];
+                    SKTransition *transition = [SKTransition fadeWithDuration:0.1];
+                    [view presentScene:scene transition:transition];
+                }
             }
             break;
         }
         case kStateLost: {
-            if ([self.youLostButton isTouchedInScene:self withTouches:touches]) {
+            if ([self.giveUpButton isTouchedInScene:self withTouches:touches]) {
                 SKView *view = self.view;
                 BKSplashScene *scene = [BKSplashScene sceneWithSize:view.frame.size];
+                SKTransition *transition = [SKTransition fadeWithDuration:0.1];
+                [view presentScene:scene transition:transition];
+
+            } else if ([self.retryButton isTouchedInScene:self withTouches:touches]) {
+                SKView *view = self.view;
+                BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
+                                                                       level:self.level];
                 SKTransition *transition = [SKTransition fadeWithDuration:0.1];
                 [view presentScene:scene transition:transition];
             }

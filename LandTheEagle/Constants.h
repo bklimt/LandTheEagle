@@ -21,6 +21,6 @@ static const int kLandMaxHeight = 5;
 static const int kLandTotalTiles = 11;
 
 // Number of levels.
-static const int kLevels = 20;
+static const int kLevels = 3;
 
 #endif
