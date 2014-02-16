@@ -260,14 +260,14 @@ static const int kStateLost = 3;
                     NSLog(@"The game is won.");
                     SKView *view = self.view;
                     BKTheme *theme = [self.theme nextTheme];
-                    BKSplashScene *scene = [BKSplashScene splashSceneWithSize:view.frame.size
+                    BKSplashScene *scene = [BKSplashScene splashSceneWithSize:self.size
                                                                         theme:theme];
                     SKTransition *transition = [SKTransition fadeWithDuration:0.1];
                     [view presentScene:scene transition:transition];
 
                 } else {
                     SKView *view = self.view;
-                    BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
+                    BKLandingScene *scene = [BKLandingScene landingSceneWithSize:self.size
                                                                            level:nextLevel
                                                                            theme:self.theme];
                     SKTransition *transition = [SKTransition fadeWithDuration:0.1];
@@ -279,14 +279,14 @@ static const int kStateLost = 3;
         case kStateLost: {
             if ([self.giveUpButton isTouched:touches]) {
                 SKView *view = self.view;
-                BKSplashScene *scene = [BKSplashScene splashSceneWithSize:view.frame.size
+                BKSplashScene *scene = [BKSplashScene splashSceneWithSize:self.size
                                                                     theme:self.theme];
                 SKTransition *transition = [SKTransition fadeWithDuration:0.1];
                 [view presentScene:scene transition:transition];
 
             } else if ([self.retryButton isTouched:touches]) {
                 SKView *view = self.view;
-                BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
+                BKLandingScene *scene = [BKLandingScene landingSceneWithSize:self.size
                                                                        level:self.level
                                                                        theme:self.theme];
                 SKTransition *transition = [SKTransition fadeWithDuration:0.1];
@@ -324,9 +324,9 @@ static const int kStateLost = 3;
         }
 
         if (!self.filter) {
-            CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-            [filter setDefaults];
-            self.filter = filter;
+            //CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+            //[filter setDefaults];
+            //self.filter = filter;
         }
         [self.filter setValue:@(radius) forKey:@"inputRadius"];
 

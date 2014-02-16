@@ -82,7 +82,7 @@
     if ([self.startButton isTouched:touches]) {
         NSLog(@"Pushed start button.");
         SKView *skView = (SKView *)self.view;
-        BKLandingScene *scene = [BKLandingScene landingSceneWithSize:skView.bounds.size
+        BKLandingScene *scene = [BKLandingScene landingSceneWithSize:self.size
                                                                level:0
                                                                theme:self.theme];
         [skView presentScene:scene];
@@ -95,7 +95,7 @@
         NSLog(@"Resuming at level %d.", level + 1);
 
         SKView *skView = (SKView *)self.view;
-        BKLandingScene *scene = [BKLandingScene landingSceneWithSize:skView.bounds.size
+        BKLandingScene *scene = [BKLandingScene landingSceneWithSize:self.size
                                                                level:level
                                                                theme:self.theme];
         [skView presentScene:scene];
@@ -105,7 +105,7 @@
         BKTheme *theme = [self.theme nextTheme];
 
         SKView *skView = (SKView *)self.view;
-        BKSplashScene *scene = [BKSplashScene splashSceneWithSize:skView.bounds.size theme:theme];
+        BKSplashScene *scene = [BKSplashScene splashSceneWithSize:self.size theme:theme];
         [skView presentScene:scene];
     }
 }
