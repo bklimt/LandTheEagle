@@ -14,6 +14,7 @@
 
 @interface BKSplashScene ()
 @property (nonatomic, retain) BKButton *startButton;
+@property (nonatomic, retain) BKButton *resumeButton;
 @end
 
 @implementation BKSplashScene
@@ -39,9 +40,16 @@
         BKLandNode *land = [BKLandNode landNodeWithLevel:(kLevels / 2)];
         [self addChild:land];
 
-        CGRect buttonRect = CGRectMake(40, 150, self.frame.size.width - 80, 48);
-        self.startButton = [BKButton buttonWithText:@"Start" inRect:buttonRect];
+        self.startButton = [BKButton buttonWithText:@"Start" atPosition:0 withScreen:self.frame];
         [self addChild:self.startButton];
+
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        int level = [defaults integerForKey:kDefaultLevel];
+        NSLog(@"Previous level was %d.", level + 1);
+
+        self.resumeButton = [BKButton buttonWithText:@"Resume" atPosition:1 withScreen:self.frame];
+        [self addChild:self.resumeButton];
+        self.resumeButton.hidden = !level;
 
         SKAction *playBackgroundSound =
             [SKAction playSoundFileNamed:@"music.mp3" waitForCompletion:NO];
@@ -54,9 +62,23 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+
     if ([self.startButton isTouchedInScene:self withTouches:touches]) {
+        NSLog(@"Pushed start button.");
         SKView *skView = (SKView *)self.view;
         BKLandingScene *scene = [BKLandingScene landingSceneWithSize:skView.bounds.size level:0];
+        [skView presentScene:scene];
+    }
+
+    if ([self.resumeButton isTouchedInScene:self withTouches:touches]) {
+        NSLog(@"Pushed resume button.");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        int level = [defaults integerForKey:kDefaultLevel];
+        NSLog(@"Resuming at level %d.", level + 1);
+
+        SKView *skView = (SKView *)self.view;
+        BKLandingScene *scene = [BKLandingScene landingSceneWithSize:skView.bounds.size level:level];
         [skView presentScene:scene];
     }
 }

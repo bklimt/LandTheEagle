@@ -51,12 +51,15 @@ static const int kStateLost = 3;
     if (self = [super initWithSize:size]) {
         self.level = level;
 
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setInteger:level forKey:kDefaultLevel];
+
         self.state = kStateWaiting;
 
         self.scaleMode = SKSceneScaleModeAspectFill;
         self.backgroundColor = [SKColor colorWithRed:0.4
                                                green:0.4
-                                               blue:0.6
+                                                blue:0.6
                                                alpha:1.0];
 
         self.physicsWorld.gravity = CGVectorMake(0, -0.7);
@@ -108,7 +111,7 @@ static const int kStateLost = 3;
         self.youWonLabel.fontSize = 40;
         self.youWonLabel.fontColor = [UIColor whiteColor];
         self.youWonLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                                CGRectGetMaxY(self.frame) - 300);
+                                                CGRectGetMidY(self.frame));
         self.youWonLabel.hidden = YES;
         [self addChild:self.youWonLabel];
 
@@ -117,22 +120,19 @@ static const int kStateLost = 3;
         self.youLostLabel.fontSize = 40;
         self.youLostLabel.fontColor = [UIColor whiteColor];
         self.youLostLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                                 CGRectGetMaxY(self.frame) - 300);
+                                                 CGRectGetMidY(self.frame));
         self.youLostLabel.hidden = YES;
         [self addChild:self.youLostLabel];
 
-        CGRect button1Rect = CGRectMake(40, 200, self.frame.size.width - 80, 48);
-        CGRect button2Rect = CGRectMake(40, 120, self.frame.size.width - 80, 48);
-
-        self.retryButton = [BKButton buttonWithText:@"Retry" inRect:button1Rect];
+        self.retryButton = [BKButton buttonWithText:@"Retry" atPosition:0 withScreen:self.frame];
         self.retryButton.hidden = YES;
         [self addChild:self.retryButton];
 
-        self.giveUpButton = [BKButton buttonWithText:@"Give Up" inRect:button2Rect];
+        self.giveUpButton = [BKButton buttonWithText:@"Give Up" atPosition:1 withScreen:self.frame];
         self.giveUpButton.hidden = YES;
         [self addChild:self.giveUpButton];
 
-        self.youWonButton = [BKButton buttonWithText:@"Next Level" inRect:button1Rect];
+        self.youWonButton = [BKButton buttonWithText:@"Next Level" atPosition:0 withScreen:self.frame];
         self.youWonButton.hidden = YES;
         [self addChild:self.youWonButton];
 
@@ -295,7 +295,7 @@ static const int kStateLost = 3;
     float dy = sum / kSampleCount;
     self.tooFast = (dy >= 3);
 
-    if (dy > 2.5) {
+    if (dy > 2.5 && self.state == kStateLanding) {
         double radius = ((dy - 2.5) * 2.0);
         if (radius > 3.0) {
             radius = 3.0;
@@ -312,7 +312,6 @@ static const int kStateLost = 3;
     } else {
         self.shouldEnableEffects = NO;
     }
-
 
     self.speedLabel.text = [NSString stringWithFormat:@"Speed: %d", (int32_t)dy];
     self.speedLabel.fontColor = (self.tooFast ? [UIColor redColor] : [UIColor whiteColor]);

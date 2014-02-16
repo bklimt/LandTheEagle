@@ -23,4 +23,7 @@ static const int kLandTotalTiles = 11;
 // Number of levels.
 static const int kLevels = 20;
 
+// Keys in NSUserDefaults.
+static NSString *const kDefaultLevel = @"level";
+
 #endif
