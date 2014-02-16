@@ -17,8 +17,8 @@
     [super viewDidLoad];
 
     SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    // skView.showsFPS = YES;
+    // skView.showsNodeCount = YES;
 
     BKTheme *theme = [BKTheme defaultTheme];
     SKScene *scene = [BKSplashScene splashSceneWithSize:skView.bounds.size theme:theme];
