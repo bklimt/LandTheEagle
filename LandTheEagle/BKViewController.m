@@ -17,7 +17,7 @@
     [super viewDidLoad];
 
     SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
+    // skView.showsFPS = YES;
     // skView.showsNodeCount = YES;
 
     // iPad 3 is 768 x 1024.
