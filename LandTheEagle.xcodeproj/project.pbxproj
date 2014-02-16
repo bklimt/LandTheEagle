@@ -18,7 +18,6 @@
 		7C08B9D018B0A05900E0BC63 /* ios7_surface_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C08B9C918B0A05900E0BC63 /* ios7_surface_small.png */; };
 		7C08B9D118B0A05900E0BC63 /* ios7_surface_top_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C08B9CA18B0A05900E0BC63 /* ios7_surface_top_bottom.png */; };
 		7C08B9D218B0A05900E0BC63 /* ios7_surface_top_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C08B9CB18B0A05900E0BC63 /* ios7_surface_top_top.png */; };
-		7C08B9D418B0B01F00E0BC63 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C08B9D318B0B01F00E0BC63 /* Default@2x.png */; };
 		7C1AB2E818AE13C700789D0F /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1AB2E718AE13C700789D0F /* background.png */; };
 		7C1AB2EA18AE170700789D0F /* flame.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C1AB2E918AE170700789D0F /* flame.png */; };
 		7C1AB2ED18AE179100789D0F /* BKShip.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1AB2EC18AE179100789D0F /* BKShip.m */; };
@@ -72,12 +71,11 @@
 		7C08B9C918B0A05900E0BC63 /* ios7_surface_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_surface_small.png; sourceTree = "<group>"; };
 		7C08B9CA18B0A05900E0BC63 /* ios7_surface_top_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_surface_top_bottom.png; sourceTree = "<group>"; };
 		7C08B9CB18B0A05900E0BC63 /* ios7_surface_top_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ios7_surface_top_top.png; sourceTree = "<group>"; };
-		7C08B9D318B0B01F00E0BC63 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7C1AB2E718AE13C700789D0F /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		7C1AB2E918AE170700789D0F /* flame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame.png; sourceTree = "<group>"; };
 		7C1AB2EB18AE179100789D0F /* BKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKShip.h; sourceTree = "<group>"; };
 		7C1AB2EC18AE179100789D0F /* BKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKShip.m; sourceTree = "<group>"; };
-		7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = LandTheEagle.app; path = "Land the Eagle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C4697FC18A9CF0B003E87DE /* Land Eagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Land Eagle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C4697FF18A9CF0B003E87DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C46980118A9CF0B003E87DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7C46980318A9CF0B003E87DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -140,11 +138,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C08B9D518B0B28E00E0BC63 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 		7C4697F318A9CF0B003E87DE = {
 			isa = PBXGroup;
 			children = (
-				7C08B9D318B0B01F00E0BC63 /* Default@2x.png */,
 				7C46980718A9CF0B003E87DE /* LandTheEagle */,
+				7C08B9D518B0B28E00E0BC63 /* iPad */,
 				7C46982B18A9CF0B003E87DE /* LandTheEagleTests */,
 				7C4697FE18A9CF0B003E87DE /* Frameworks */,
 				7C4697FD18A9CF0B003E87DE /* Products */,
@@ -154,7 +159,7 @@
 		7C4697FD18A9CF0B003E87DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */,
+				7C4697FC18A9CF0B003E87DE /* Land Eagle.app */,
 				7C46982418A9CF0B003E87DE /* LandTheEagleTests.xctest */,
 			);
 			name = Products;
@@ -264,7 +269,7 @@
 			);
 			name = "Land Eagle";
 			productName = LandTheEagle;
-			productReference = 7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */;
+			productReference = 7C4697FC18A9CF0B003E87DE /* Land Eagle.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7C46982318A9CF0B003E87DE /* LandTheEagleTests */ = {
@@ -336,7 +341,6 @@
 				7C08B9D218B0A05900E0BC63 /* ios7_surface_top_top.png in Resources */,
 				7C6603B918AE0FCE0055F942 /* surface_top_bottom.png in Resources */,
 				7C08B9D018B0A05900E0BC63 /* ios7_surface_small.png in Resources */,
-				7C08B9D418B0B01F00E0BC63 /* Default@2x.png in Resources */,
 				7C08B9CE18B0A05900E0BC63 /* ios7_lander.png in Resources */,
 				7C6603B818AE0FCE0055F942 /* surface_bottom_top.png in Resources */,
 				7C08B9CC18B0A05900E0BC63 /* ios7_background.png in Resources */,
@@ -499,11 +503,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LandTheEagle/LandTheEagle-Prefix.pch";
 				INFOPLIST_FILE = "LandTheEagle/LandTheEagle-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -513,11 +520,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LandTheEagle/LandTheEagle-Prefix.pch";
 				INFOPLIST_FILE = "LandTheEagle/LandTheEagle-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
