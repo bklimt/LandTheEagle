@@ -30,7 +30,7 @@
     [ship addChild:lander];
 
     ship.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:13.0];
-    ship.physicsBody.affectedByGravity = YES;
+    ship.physicsBody.affectedByGravity = NO;
     ship.physicsBody.dynamic = YES;
     ship.physicsBody.mass = 10.0;
     ship.physicsBody.restitution = 0.01;
@@ -43,6 +43,10 @@
     ship.playThrustSound = [SKAction playSoundFileNamed:@"thrust.mp3" waitForCompletion:NO];
 
     return ship;
+}
+
+- (void)startFalling {
+    self.physicsBody.affectedByGravity = YES;
 }
 
 - (void)boost {

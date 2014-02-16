@@ -12,6 +12,7 @@
 
 + (instancetype)ship;
 
+- (void)startFalling;
 - (void)boost;
 - (void)turnOff;
 - (void)explode;

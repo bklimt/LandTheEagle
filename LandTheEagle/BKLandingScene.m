@@ -15,6 +15,7 @@
 #import "BKViewController.h"
 #import "Constants.h"
 
+static const int kStateWaiting = 0;
 static const int kStateLanding = 1;
 static const int kStateWon = 2;
 static const int kStateLost = 3;
@@ -28,6 +29,7 @@ static const int kStateLost = 3;
 @property (nonatomic, retain) SKLabelNode *fuelLabel;
 @property (nonatomic, retain) SKLabelNode *youWonLabel;
 @property (nonatomic, retain) SKLabelNode *youLostLabel;
+@property (nonatomic, retain) SKNode *explanationLabel;
 
 @property (nonatomic, retain) BKButton *youWonButton;
 @property (nonatomic, retain) BKButton *retryButton;
@@ -49,7 +51,7 @@ static const int kStateLost = 3;
     if (self = [super initWithSize:size]) {
         self.level = level;
 
-        self.state = kStateLanding;
+        self.state = kStateWaiting;
 
         self.scaleMode = SKSceneScaleModeAspectFill;
         self.backgroundColor = [SKColor colorWithRed:0.4
@@ -134,6 +136,36 @@ static const int kStateLost = 3;
         self.youWonButton.hidden = YES;
         [self addChild:self.youWonButton];
 
+
+        self.explanationLabel = [SKNode node];
+
+        SKLabelNode *touchToThrust = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
+        touchToThrust.text = @"Touch to thrust.";
+        touchToThrust.fontSize = 30;
+        touchToThrust.fontColor = [UIColor whiteColor];
+        touchToThrust.position = CGPointMake(CGRectGetMidX(self.frame),
+                                             CGRectGetMaxY(self.frame) - 200);
+        [self.explanationLabel addChild:touchToThrust];
+
+        SKLabelNode *landWhereFlat = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
+        landWhereFlat.text = @"Land where flat.";
+        landWhereFlat.fontSize = 30;
+        landWhereFlat.fontColor = [UIColor whiteColor];
+        landWhereFlat.position = CGPointMake(CGRectGetMidX(self.frame),
+                                             CGRectGetMaxY(self.frame) - 250);
+        [self.explanationLabel addChild:landWhereFlat];
+
+        SKLabelNode *notTooFast = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
+        notTooFast.text = @"Not too fast.";
+        notTooFast.fontSize = 30;
+        notTooFast.fontColor = [UIColor whiteColor];
+        notTooFast.position = CGPointMake(CGRectGetMidX(self.frame),
+                                          CGRectGetMaxY(self.frame) - 300);
+        [self.explanationLabel addChild:notTooFast];
+
+        [self addChild:self.explanationLabel];
+
+
         SKAction *playBackgroundSound =
             [SKAction playSoundFileNamed:@"ambiance.mp3" waitForCompletion:NO];
         SKAction *waitForThirtySeconds = [SKAction waitForDuration:30];
@@ -195,6 +227,12 @@ static const int kStateLost = 3;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     switch (self.state) {
+        case kStateWaiting: {
+            self.state = kStateLanding;
+            [self.ship startFalling];
+            [self.explanationLabel runAction:[SKAction fadeOutWithDuration:0.5]];
+            break;
+        }
         case kStateLanding: {
             if (self.fuel > 0) {
                 self.fuel -= 1;
