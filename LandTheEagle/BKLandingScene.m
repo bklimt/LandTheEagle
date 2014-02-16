@@ -12,6 +12,7 @@
 #import "BKLandNode.h"
 #import "BKShip.h"
 #import "BKSplashScene.h"
+#import "BKTheme.h"
 #import "BKViewController.h"
 #import "Constants.h"
 
@@ -21,6 +22,8 @@ static const int kStateWon = 2;
 static const int kStateLost = 3;
 
 @interface BKLandingScene ()
+@property (nonatomic, retain) BKTheme *theme;
+
 @property (nonatomic, retain) BKShip *ship;
 @property (nonatomic, retain) BKLandNode *land;
 
@@ -43,13 +46,14 @@ static const int kStateLost = 3;
 
 @implementation BKLandingScene
 
-+ (instancetype)landingSceneWithSize:(CGSize)size level:(int)level {
-    return [[BKLandingScene alloc] initWithSize:size level:level];
++ (instancetype)landingSceneWithSize:(CGSize)size level:(int)level theme:(BKTheme *)theme {
+    return [[BKLandingScene alloc] initWithSize:size level:level theme:theme];
 }
 
--(id)initWithSize:(CGSize)size level:(int)level {
+-(id)initWithSize:(CGSize)size level:(int)level theme:(BKTheme *)theme {
     if (self = [super initWithSize:size]) {
         self.level = level;
+        self.theme = theme;
 
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setInteger:level forKey:kDefaultLevel];
@@ -65,15 +69,15 @@ static const int kStateLost = 3;
         self.physicsWorld.gravity = CGVectorMake(0, -0.7);
         self.physicsWorld.contactDelegate = self;
 
-        self.fuel = 100 - 70 * (self.level / (float)kLevels);
+        self.fuel = 100 - 80 * (self.level / (float)kLevels);
 
         CGPoint center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        SKNode *space = [SKSpriteNode spriteNodeWithImageNamed:@"background.png"];
+        SKNode *space = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"background"]];
         space.position = center;
         space.scale = 1.0;
         [self addChild:space];
 
-        self.land = [BKLandNode landNodeWithLevel:self.level];
+        self.land = [BKLandNode landNodeWithLevel:self.level theme:theme];
         [self addChild:self.land];
 
         self.levelLabel = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
@@ -102,7 +106,7 @@ static const int kStateLost = 3;
 
         CGPoint shipStart = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame) - 20);
 
-        self.ship = [BKShip ship];
+        self.ship = [BKShip shipWithTheme:theme];
         self.ship.position = shipStart;
         [self addChild:self.ship];
         
@@ -165,7 +169,6 @@ static const int kStateLost = 3;
 
         [self addChild:self.explanationLabel];
 
-
         SKAction *playBackgroundSound =
             [SKAction playSoundFileNamed:@"ambiance.mp3" waitForCompletion:NO];
         SKAction *waitForThirtySeconds = [SKAction waitForDuration:30];
@@ -211,8 +214,17 @@ static const int kStateLost = 3;
         int nextLevel = self.level + 1;
         self.youWonLabel.hidden = NO;
         if (nextLevel >= kLevels) {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            BOOL hasWon = [defaults boolForKey:kDefaultWon];
+
             self.youWonLabel.text = @"You win!";
-            return;
+            if (hasWon) {
+                self.youWonButton.text = @"Start Over";
+            } else {
+                self.youWonButton.text = @"Unlock Ivy Theme";
+            }
+
+            [defaults setBool:YES forKey:kDefaultWon];
         }
 
         SKAction *wait = [SKAction waitForDuration:1.0];
@@ -242,14 +254,22 @@ static const int kStateLost = 3;
             break;
         }
         case kStateWon: {
-            if ([self.youWonButton isTouchedInScene:self withTouches:touches]) {
+            if ([self.youWonButton isTouched:touches]) {
                 int nextLevel = self.level + 1;
                 if (nextLevel >= kLevels) {
-                    // You've beaten the game!
+                    NSLog(@"The game is won.");
+                    SKView *view = self.view;
+                    BKTheme *theme = [self.theme nextTheme];
+                    BKSplashScene *scene = [BKSplashScene splashSceneWithSize:view.frame.size
+                                                                        theme:theme];
+                    SKTransition *transition = [SKTransition fadeWithDuration:0.1];
+                    [view presentScene:scene transition:transition];
+
                 } else {
                     SKView *view = self.view;
                     BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
-                                                                           level:nextLevel];
+                                                                           level:nextLevel
+                                                                           theme:self.theme];
                     SKTransition *transition = [SKTransition fadeWithDuration:0.1];
                     [view presentScene:scene transition:transition];
                 }
@@ -257,16 +277,18 @@ static const int kStateLost = 3;
             break;
         }
         case kStateLost: {
-            if ([self.giveUpButton isTouchedInScene:self withTouches:touches]) {
+            if ([self.giveUpButton isTouched:touches]) {
                 SKView *view = self.view;
-                BKSplashScene *scene = [BKSplashScene sceneWithSize:view.frame.size];
+                BKSplashScene *scene = [BKSplashScene splashSceneWithSize:view.frame.size
+                                                                    theme:self.theme];
                 SKTransition *transition = [SKTransition fadeWithDuration:0.1];
                 [view presentScene:scene transition:transition];
 
-            } else if ([self.retryButton isTouchedInScene:self withTouches:touches]) {
+            } else if ([self.retryButton isTouched:touches]) {
                 SKView *view = self.view;
                 BKLandingScene *scene = [BKLandingScene landingSceneWithSize:view.frame.size
-                                                                       level:self.level];
+                                                                       level:self.level
+                                                                       theme:self.theme];
                 SKTransition *transition = [SKTransition fadeWithDuration:0.1];
                 [view presentScene:scene transition:transition];
             }

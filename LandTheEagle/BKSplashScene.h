@@ -8,6 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+@class BKTheme;
+
 @interface BKSplashScene : SKScene
+
++ (instancetype)splashSceneWithSize:(CGSize)size theme:(BKTheme *)theme;
 
 @end

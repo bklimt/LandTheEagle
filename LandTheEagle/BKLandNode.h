@@ -11,6 +11,7 @@
 #import "Constants.h"
 
 @class BKLandStrip;
+@class BKTheme;
 
 @interface BKLandNode : SKNode {
     BOOL moving;
@@ -18,7 +19,7 @@
     BKLandStrip *strips[kLandTotalTiles];
 }
 
-+ (instancetype)landNodeWithLevel:(int)level;
++ (instancetype)landNodeWithLevel:(int)level theme:(BKTheme *)theme;
 
 - (void)startMoving;
 - (void)stopMoving;

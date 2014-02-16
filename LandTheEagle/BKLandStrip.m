@@ -8,6 +8,7 @@
 
 #import "BKLandStrip.h"
 
+#import "BKTheme.h"
 #import "Constants.h"
 
 @interface BKLandStrip ()
@@ -19,7 +20,8 @@
                                     X:(int)x
                                     Y:(int)y
                            tileHeight:(int)tileHeight
-                                count:(int)count {
+                                count:(int)count
+                                theme:(BKTheme *)theme {
     BKLandStrip *strip = [[BKLandStrip alloc] init];
     for (int i = 0; i < count; ++ i) {
         CGMutablePathRef path = CGPathCreateMutable();
@@ -28,21 +30,22 @@
 
         NSString *image;
         if (i) {
-            image = @"surface_small.png";
+            image = @"surface_small";
             CGPathAddLineToPoint(path, NULL, kLandTileWidth/2, kLandTileWidth/2);
             CGPathAddLineToPoint(path, NULL, -kLandTileWidth/2, kLandTileWidth/2);
         } else if (delta < 0) {
-            image = @"surface_top_bottom.png";
+            image = @"surface_top_bottom";
             CGPathAddLineToPoint(path, NULL, -kLandTileWidth/2, kLandTileWidth/2);
         } else if (delta > 0) {
-            image = @"surface_bottom_top.png";
+            image = @"surface_bottom_top";
             CGPathAddLineToPoint(path, NULL, kLandTileWidth/2, kLandTileWidth/2);
         } else {
-            image = @"surface_top_top.png";
+            image = @"surface_top_top";
             CGPathAddLineToPoint(path, NULL, kLandTileWidth/2, kLandTileWidth/2);
             CGPathAddLineToPoint(path, NULL, -kLandTileWidth/2, kLandTileWidth/2);
         }
         CGPathCloseSubpath(path);
+        image = [theme fileNameForImage:image];
 
         SKNode *tile = [SKSpriteNode spriteNodeWithImageNamed:image];
         tile.scale = 0.375;

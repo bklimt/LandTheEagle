@@ -12,9 +12,12 @@
 
 + (instancetype)buttonWithText:(NSString *)text inRect:(CGRect)rect;
 
-- (BOOL)isTouchedInScene:(SKScene *)scene withTouches:(NSSet *)touches;
-
 + (instancetype)buttonWithText:(NSString *)text
                     atPosition:(int)position
                     withScreen:(CGRect)screen;
+
+- (BOOL)isTouched:(NSSet *)touches;
+
+- (void)setText:(NSString *)text;
+
 @end

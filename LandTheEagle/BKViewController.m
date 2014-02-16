@@ -9,6 +9,7 @@
 #import "BKViewController.h"
 #import "BKLandingScene.h"
 #import "BKSplashScene.h"
+#import "BKTheme.h"
 
 @implementation BKViewController
 
@@ -19,7 +20,8 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
 
-    SKScene *scene = [BKSplashScene sceneWithSize:skView.bounds.size];
+    BKTheme *theme = [BKTheme defaultTheme];
+    SKScene *scene = [BKSplashScene splashSceneWithSize:skView.bounds.size theme:theme];
     [skView presentScene:scene];
 }
 

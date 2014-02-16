@@ -9,9 +9,8 @@
 #import "BKButton.h"
 
 @interface BKButton ()
-
 @property (nonatomic, retain) SKShapeNode *rectNode;
-
+@property (nonatomic, retain) SKLabelNode *labelNode;
 @end
 
 @implementation BKButton
@@ -34,21 +33,21 @@
     node.rectNode.path = path;
     node.rectNode.fillColor = [UIColor whiteColor];
 
-    SKLabelNode *labelNode = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
-    labelNode.text = text;
-    labelNode.fontSize = 24;
-    labelNode.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect) + 15);
-    labelNode.fontColor = [UIColor blueColor];
+    node.labelNode = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
+    node.labelNode.text = text;
+    node.labelNode.fontSize = 24;
+    node.labelNode.position = CGPointMake(CGRectGetMidX(rect), CGRectGetMinY(rect) + 15);
+    node.labelNode.fontColor = [UIColor blueColor];
 
     [node addChild:node.rectNode];
-    [node addChild:labelNode];
+    [node addChild:node.labelNode];
 
     CGPathRelease(path);
 
     return node;
 }
 
-- (BOOL)isTouchedInScene:(SKScene *)scene withTouches:(NSSet *)touches {
+- (BOOL)isTouched:(NSSet *)touches {
     if (self.isHidden) {
         return NO;
     }
@@ -60,6 +59,10 @@
         }
     }
     return NO;
+}
+
+- (void)setText:(NSString *)text {
+    self.labelNode.text = text;
 }
 
 @end

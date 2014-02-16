@@ -14,21 +14,23 @@
 @interface BKLandNode ()
 @property (nonatomic) int level;
 @property (nonatomic) float flatProbability;
+@property (nonatomic, retain) BKTheme *theme;
 @end
 
 @implementation BKLandNode
 
-+ (instancetype)landNodeWithLevel:(int)level {
-    return [[BKLandNode alloc] initWithLevel:level];
++ (instancetype)landNodeWithLevel:(int)level theme:(BKTheme *)theme {
+    return [[BKLandNode alloc] initWithLevel:level theme:theme];
 }
 
-- (instancetype)initWithLevel:(int)level {
+- (instancetype)initWithLevel:(int)level theme:(BKTheme *)theme {
     if (self = [super init]) {
         self.level = level;
+        self.theme = theme;
 
         self.flatProbability = 1.0 - (self.level / (float)kLevels);
-        if (self.flatProbability > 0.9) {
-            self.flatProbability = 0.9;
+        if (self.flatProbability > 0.4) {
+            self.flatProbability = 0.4;
         }
         NSLog(@"Probability of flat ground is %f.", self.flatProbability);
 
@@ -48,7 +50,7 @@
     }
     moving = YES;
 
-    float speed = 0.3 + ((1.0 - (self.level / (float)kLevels)) * 0.4);
+    float speed = 0.1 + ((1.0 - (self.level / (float)kLevels)) * 0.3);
     NSLog(@"Ground is moving at %f seconds.", speed);
 
     SKAction *moveLeft = [SKAction moveToX:(-kLandTileWidth) duration:speed];
@@ -109,7 +111,8 @@
                                                           X:x
                                                           Y:y
                                                  tileHeight:kLandTileWidth
-                                                      count:(currentRow + 1)];
+                                                      count:(currentRow + 1)
+                                                      theme:self.theme];
     strips[position] = strip;
     [self addChild:strip];
 

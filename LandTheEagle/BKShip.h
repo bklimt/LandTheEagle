@@ -8,9 +8,11 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+@class BKTheme;
+
 @interface BKShip : SKNode
 
-+ (instancetype)ship;
++ (instancetype)shipWithTheme:(BKTheme *)theme;
 
 - (void)startFalling;
 - (void)boost;

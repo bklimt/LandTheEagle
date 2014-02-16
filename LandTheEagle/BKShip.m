@@ -9,6 +9,7 @@
 #import "BKShip.h"
 
 #import "Constants.h"
+#import "BKTheme.h"
 
 @interface BKShip ()
 @property (nonatomic, retain) SKNode *flame;
@@ -17,15 +18,15 @@
 
 @implementation BKShip
 
-+ (instancetype)ship {
++ (instancetype)shipWithTheme:(BKTheme *)theme {
     BKShip *ship = [[BKShip alloc] init];
 
-    ship.flame = [SKSpriteNode spriteNodeWithImageNamed:@"flame.png"];
+    ship.flame = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"flame"]];
     ship.flame.scale = 0.08;
     ship.flame.position = CGPointMake(0, -20);
     [ship addChild:ship.flame];
 
-    SKNode *lander = [SKSpriteNode spriteNodeWithImageNamed:@"lander.png"];
+    SKNode *lander = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"lander"]];
     lander.scale = 0.18;
     [ship addChild:lander];
 

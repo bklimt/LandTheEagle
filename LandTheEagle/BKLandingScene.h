@@ -8,8 +8,10 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+@class BKTheme;
+
 @interface BKLandingScene : SKScene<SKPhysicsContactDelegate>
 
-+ (instancetype)landingSceneWithSize:(CGSize)size level:(int)level;
++ (instancetype)landingSceneWithSize:(CGSize)size level:(int)level theme:(BKTheme *)theme;
 
 @end
