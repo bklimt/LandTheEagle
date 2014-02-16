@@ -133,6 +133,13 @@ static const int kStateLost = 3;
         self.youWonButton = [BKButton buttonWithText:@"Next Level" inRect:button1Rect];
         self.youWonButton.hidden = YES;
         [self addChild:self.youWonButton];
+
+        SKAction *playBackgroundSound =
+            [SKAction playSoundFileNamed:@"ambiance.mp3" waitForCompletion:NO];
+        SKAction *waitForThirtySeconds = [SKAction waitForDuration:30];
+        playBackgroundSound = [SKAction sequence:@[playBackgroundSound, waitForThirtySeconds]];
+        playBackgroundSound = [SKAction repeatActionForever:playBackgroundSound];
+        [self runAction:playBackgroundSound];
     }
     return self;
 }

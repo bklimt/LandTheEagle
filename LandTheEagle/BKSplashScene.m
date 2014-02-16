@@ -42,6 +42,13 @@
         CGRect buttonRect = CGRectMake(40, 150, self.frame.size.width - 80, 48);
         self.startButton = [BKButton buttonWithText:@"Start" inRect:buttonRect];
         [self addChild:self.startButton];
+
+        SKAction *playBackgroundSound =
+            [SKAction playSoundFileNamed:@"music.mp3" waitForCompletion:NO];
+        SKAction *waitForSixteenSeconds = [SKAction waitForDuration:18];
+        playBackgroundSound = [SKAction sequence:@[playBackgroundSound, waitForSixteenSeconds]];
+        playBackgroundSound = [SKAction repeatActionForever:playBackgroundSound];
+        [self runAction:playBackgroundSound];
     }
     return self;
 }

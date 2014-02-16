@@ -12,7 +12,7 @@
 
 @interface BKShip ()
 @property (nonatomic, retain) SKNode *flame;
-//@property (nonatomic, retain) SKNode *explosion;
+@property (nonatomic, retain) SKAction *playThrustSound;
 @end
 
 @implementation BKShip
@@ -40,9 +40,7 @@
     ship.physicsBody.collisionBitMask = kCategoryLandFlat | kCategoryLandSloped;
     ship.physicsBody.contactTestBitMask = kCategoryLandFlat | kCategoryLandSloped;
 
-    //ship.explosion = [SKSpriteNode spriteNodeWithImageNamed:@"flame.png"];
-    //ship.explosion.scale = 0.001;
-    //ship.explosion.position = CGPointMake(0, -20);
+    ship.playThrustSound = [SKAction playSoundFileNamed:@"thrust.mp3" waitForCompletion:NO];
 
     return ship;
 }
@@ -54,6 +52,8 @@
     SKAction *flareIn = [SKAction scaleTo:0.08 duration:0.2];
     SKAction *flare = [SKAction sequence:@[flareOut, flareIn]];
     [self.flame runAction:flare withKey:@"flare"];
+
+    [self runAction:self.playThrustSound];
 }
 
 - (void)turnOff {
@@ -62,13 +62,6 @@
 }
 
 - (void)explode {
-    /*if (!self.explosion.parent) {
-        [self addChild:self.explosion];
-    }
-    SKAction *engulf = [SKAction scaleTo:0.4 duration:1.0];
-    [self.explosion runAction:engulf];
-    */
-
     SKAction *fallOver = [SKAction rotateToAngle:-M_PI_2 duration:1.0];
     [self runAction:fallOver];
 }
