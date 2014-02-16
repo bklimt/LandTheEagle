@@ -29,6 +29,6 @@ static const int kLevels = 30;
 
 // Keys in NSUserDefaults.
 static NSString *const kDefaultLevel = @"level";
-static NSString *const kDefaultWon = @"hasWon";
+static NSString *const kDefaultWon = @"won";
 
 #endif
