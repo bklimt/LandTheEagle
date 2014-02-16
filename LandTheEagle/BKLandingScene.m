@@ -323,6 +323,8 @@ static const int kStateLost = 3;
             radius = 3.0;
         }
 
+        [self.ship blur:radius];
+
         if (!self.filter) {
             //CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
             //[filter setDefaults];
@@ -332,6 +334,7 @@ static const int kStateLost = 3;
 
         self.shouldEnableEffects = YES;
     } else {
+        [self.ship unblur];
         self.shouldEnableEffects = NO;
     }
 

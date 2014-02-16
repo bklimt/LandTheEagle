@@ -18,5 +18,7 @@
 - (void)boost;
 - (void)turnOff;
 - (void)explode;
+- (void)blur:(float)radius;
+- (void)unblur;
 
 @end

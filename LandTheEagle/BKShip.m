@@ -14,36 +14,46 @@
 @interface BKShip ()
 @property (nonatomic, retain) SKNode *flame;
 @property (nonatomic, retain) SKAction *playThrustSound;
+@property (nonatomic, retain) SKEffectNode *effect;
 @end
 
 @implementation BKShip
 
 + (instancetype)shipWithTheme:(BKTheme *)theme {
-    BKShip *ship = [[BKShip alloc] init];
+    return [[BKShip alloc] initWithTheme:theme];
+}
 
-    ship.flame = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"flame"]];
-    ship.flame.scale = 0.08;
-    ship.flame.position = CGPointMake(0, -20);
-    [ship addChild:ship.flame];
+- (instancetype)initWithTheme:(BKTheme *)theme {
+    if (self = [super init]) {
+        self.effect = [SKEffectNode node];
+        CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+        [filter setDefaults];
+        self.effect.filter = filter;
+        [self addChild:self.effect];
 
-    SKNode *lander = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"lander"]];
-    lander.scale = 0.18;
-    [ship addChild:lander];
+        self.flame = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"flame"]];
+        self.flame.scale = 0.08;
+        self.flame.position = CGPointMake(0, -20);
+        [self.effect addChild:self.flame];
 
-    ship.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:13.0];
-    ship.physicsBody.affectedByGravity = NO;
-    ship.physicsBody.dynamic = YES;
-    ship.physicsBody.mass = 10.0;
-    ship.physicsBody.restitution = 0.01;
-    ship.physicsBody.friction = 10.0;
-    ship.physicsBody.angularDamping = 5.0;
-    ship.physicsBody.categoryBitMask = kCategoryShip;
-    ship.physicsBody.collisionBitMask = kCategoryLandFlat | kCategoryLandSloped;
-    ship.physicsBody.contactTestBitMask = kCategoryLandFlat | kCategoryLandSloped;
+        SKNode *lander = [SKSpriteNode spriteNodeWithImageNamed:[theme fileNameForImage:@"lander"]];
+        lander.scale = 0.18;
+        [self.effect addChild:lander];
 
-    ship.playThrustSound = [SKAction playSoundFileNamed:@"thrust.mp3" waitForCompletion:NO];
+        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:13.0];
+        self.physicsBody.affectedByGravity = NO;
+        self.physicsBody.dynamic = YES;
+        self.physicsBody.mass = 10.0;
+        self.physicsBody.restitution = 0.01;
+        self.physicsBody.friction = 10.0;
+        self.physicsBody.angularDamping = 5.0;
+        self.physicsBody.categoryBitMask = kCategoryShip;
+        self.physicsBody.collisionBitMask = kCategoryLandFlat | kCategoryLandSloped;
+        self.physicsBody.contactTestBitMask = kCategoryLandFlat | kCategoryLandSloped;
 
-    return ship;
+        self.playThrustSound = [SKAction playSoundFileNamed:@"thrust.mp3" waitForCompletion:NO];
+    }
+    return self;
 }
 
 - (void)startFalling {
@@ -69,6 +79,15 @@
 - (void)explode {
     SKAction *fallOver = [SKAction rotateToAngle:-M_PI_2 duration:1.0];
     [self runAction:fallOver];
+}
+
+- (void)blur:(float)radius {
+    self.effect.shouldEnableEffects = YES;
+    [self.effect.filter setValue:@(radius) forKey:@"inputRadius"];
+}
+
+- (void)unblur {
+    self.effect.shouldEnableEffects = NO;
 }
 
 @end

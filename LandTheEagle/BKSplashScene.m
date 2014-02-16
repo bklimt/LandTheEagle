@@ -53,7 +53,7 @@
         [self addChild:self.startButton];
 
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        int level = [defaults integerForKey:kDefaultLevel];
+        int level = (int)[defaults integerForKey:kDefaultLevel];
         NSLog(@"Previous level was %d.", level + 1);
 
         self.resumeButton = [BKButton buttonWithText:@"Resume" atPosition:1 withScreen:self.frame];
@@ -91,7 +91,7 @@
     if ([self.resumeButton isTouched:touches]) {
         NSLog(@"Pushed resume button.");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        int level = [defaults integerForKey:kDefaultLevel];
+        int level = (int)[defaults integerForKey:kDefaultLevel];
         NSLog(@"Resuming at level %d.", level + 1);
 
         SKView *skView = (SKView *)self.view;
