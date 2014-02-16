@@ -144,7 +144,7 @@ static const int kStateLost = 3;
         touchToThrust.fontSize = 30;
         touchToThrust.fontColor = [UIColor whiteColor];
         touchToThrust.position = CGPointMake(CGRectGetMidX(self.frame),
-                                             CGRectGetMaxY(self.frame) - 200);
+                                             CGRectGetMaxY(self.frame) - 230);
         [self.explanationLabel addChild:touchToThrust];
 
         SKLabelNode *landWhereFlat = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
@@ -152,7 +152,7 @@ static const int kStateLost = 3;
         landWhereFlat.fontSize = 30;
         landWhereFlat.fontColor = [UIColor whiteColor];
         landWhereFlat.position = CGPointMake(CGRectGetMidX(self.frame),
-                                             CGRectGetMaxY(self.frame) - 250);
+                                             CGRectGetMaxY(self.frame) - 280);
         [self.explanationLabel addChild:landWhereFlat];
 
         SKLabelNode *notTooFast = [SKLabelNode labelNodeWithFontNamed:@"Courier"];
@@ -160,7 +160,7 @@ static const int kStateLost = 3;
         notTooFast.fontSize = 30;
         notTooFast.fontColor = [UIColor whiteColor];
         notTooFast.position = CGPointMake(CGRectGetMidX(self.frame),
-                                          CGRectGetMaxY(self.frame) - 300);
+                                          CGRectGetMaxY(self.frame) - 330);
         [self.explanationLabel addChild:notTooFast];
 
         [self addChild:self.explanationLabel];
