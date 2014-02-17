@@ -75,7 +75,7 @@
 		7C1AB2E918AE170700789D0F /* flame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flame.png; sourceTree = "<group>"; };
 		7C1AB2EB18AE179100789D0F /* BKShip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BKShip.h; sourceTree = "<group>"; };
 		7C1AB2EC18AE179100789D0F /* BKShip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BKShip.m; sourceTree = "<group>"; };
-		7C4697FC18A9CF0B003E87DE /* Land Eagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Land Eagle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LandTheEagle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C4697FF18A9CF0B003E87DE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C46980118A9CF0B003E87DE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7C46980318A9CF0B003E87DE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -159,7 +159,7 @@
 		7C4697FD18A9CF0B003E87DE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C4697FC18A9CF0B003E87DE /* Land Eagle.app */,
+				7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */,
 				7C46982418A9CF0B003E87DE /* LandTheEagleTests.xctest */,
 			);
 			name = Products;
@@ -269,7 +269,7 @@
 			);
 			name = LandTheEagle;
 			productName = LandTheEagle;
-			productReference = 7C4697FC18A9CF0B003E87DE /* Land Eagle.app */;
+			productReference = 7C4697FC18A9CF0B003E87DE /* LandTheEagle.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7C46982318A9CF0B003E87DE /* LandTheEagleTests */ = {
@@ -300,6 +300,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Bryan Klimt";
 				TargetAttributes = {
+					7C4697FB18A9CF0B003E87DE = {
+						DevelopmentTeam = BNHJYV62WY;
+					};
 					7C46982318A9CF0B003E87DE = {
 						TestTargetID = 7C4697FB18A9CF0B003E87DE;
 					};
