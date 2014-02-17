@@ -145,6 +145,30 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
+		7C4567C618B18F3700E867DB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7C1AB2E718AE13C700789D0F /* background.png */,
+				7C1AB2E918AE170700789D0F /* flame.png */,
+				7C6603A918AE03550055F942 /* lander.png */,
+				7C6603B418AE0E9C0055F942 /* surface_small.png */,
+				7C6603B218AE0DED0055F942 /* surface_top_top.png */,
+				7C6603B618AE0FCE0055F942 /* surface_bottom_top.png */,
+				7C6603B718AE0FCE0055F942 /* surface_top_bottom.png */,
+				7C08B9C518B0A05900E0BC63 /* ios7_background.png */,
+				7C08B9C618B0A05900E0BC63 /* ios7_flame.png */,
+				7C08B9C718B0A05900E0BC63 /* ios7_lander.png */,
+				7C08B9C818B0A05900E0BC63 /* ios7_surface_bottom_top.png */,
+				7C08B9C918B0A05900E0BC63 /* ios7_surface_small.png */,
+				7C08B9CA18B0A05900E0BC63 /* ios7_surface_top_bottom.png */,
+				7C08B9CB18B0A05900E0BC63 /* ios7_surface_top_top.png */,
+				7C08B9BA18B0376E00E0BC63 /* thrust.mp3 */,
+				7C08B9BC18B03BB400E0BC63 /* ambiance.mp3 */,
+				7C08B9C018B041D100E0BC63 /* music.mp3 */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		7C4697F318A9CF0B003E87DE = {
 			isa = PBXGroup;
 			children = (
@@ -199,23 +223,7 @@
 				7C4E34B418AF4C79008B2034 /* BKButton.m */,
 				7C08B9C218B09C2900E0BC63 /* BKTheme.h */,
 				7C08B9C318B09C2900E0BC63 /* BKTheme.m */,
-				7C1AB2E718AE13C700789D0F /* background.png */,
-				7C1AB2E918AE170700789D0F /* flame.png */,
-				7C6603A918AE03550055F942 /* lander.png */,
-				7C6603B418AE0E9C0055F942 /* surface_small.png */,
-				7C6603B218AE0DED0055F942 /* surface_top_top.png */,
-				7C6603B618AE0FCE0055F942 /* surface_bottom_top.png */,
-				7C6603B718AE0FCE0055F942 /* surface_top_bottom.png */,
-				7C08B9C518B0A05900E0BC63 /* ios7_background.png */,
-				7C08B9C618B0A05900E0BC63 /* ios7_flame.png */,
-				7C08B9C718B0A05900E0BC63 /* ios7_lander.png */,
-				7C08B9C818B0A05900E0BC63 /* ios7_surface_bottom_top.png */,
-				7C08B9C918B0A05900E0BC63 /* ios7_surface_small.png */,
-				7C08B9CA18B0A05900E0BC63 /* ios7_surface_top_bottom.png */,
-				7C08B9CB18B0A05900E0BC63 /* ios7_surface_top_top.png */,
-				7C08B9BA18B0376E00E0BC63 /* thrust.mp3 */,
-				7C08B9BC18B03BB400E0BC63 /* ambiance.mp3 */,
-				7C08B9C018B041D100E0BC63 /* music.mp3 */,
+				7C4567C618B18F3700E867DB /* Resources */,
 				7C46981318A9CF0B003E87DE /* Main.storyboard */,
 				7C46981E18A9CF0B003E87DE /* Images.xcassets */,
 				7C46980818A9CF0B003E87DE /* Supporting Files */,

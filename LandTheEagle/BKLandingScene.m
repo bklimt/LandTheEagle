@@ -5,6 +5,9 @@
 //  Created by Bryan Klimt on 2/10/14.
 //  Copyright (c) 2014 Bryan Klimt. All rights reserved.
 //
+//  This source code is licensed as described in the LICENSE file in the root directory of this
+//  source tree.
+//
 
 #import "BKLandingScene.h"
 
@@ -324,18 +327,8 @@ static const int kStateLost = 3;
         }
 
         [self.ship blur:radius];
-
-        if (!self.filter) {
-            //CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
-            //[filter setDefaults];
-            //self.filter = filter;
-        }
-        [self.filter setValue:@(radius) forKey:@"inputRadius"];
-
-        self.shouldEnableEffects = YES;
     } else {
         [self.ship unblur];
-        self.shouldEnableEffects = NO;
     }
 
     self.speedLabel.text = [NSString stringWithFormat:@"Speed: %d", (int32_t)dy];
