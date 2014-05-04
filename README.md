@@ -1,6 +1,8 @@
 Land the Eagle
 ==============
 
+(This is the iOS version. You should also check out the [Unity version](https://github.com/bklimt/LandTheEagleUnity).)
+
 The success of Flappy Bird inspired me to ask the question "How fast can I build the simplest possible game I would feel
 proud to put on the App Store?" `Land the Eagle` is the result.
 
